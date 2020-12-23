@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "dev.dankom.torn.mixin.mixins",
+  "refmap": "mixins.client.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "entity.MixinEntity",
+    "player.MixinEntityPlayerSP"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

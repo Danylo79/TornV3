@@ -1,0 +1,18 @@
+[
+  {
+    "modid": "torn",
+    "name": "Torn Mod",
+    "description": "A mod to fix or patch minecraft rendering bugs",
+    "version": "${version}",
+    "mcversion": "${mcversion}]",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "Dankom"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
