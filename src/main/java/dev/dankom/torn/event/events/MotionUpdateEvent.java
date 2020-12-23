@@ -1,24 +1,31 @@
 package dev.dankom.torn.event.events;
 
-import dev.dankom.torn.event.EventBase;
+import dev.dankom.torn.event.Event;
 import dev.dankom.torn.event.EventType;
 
-public class MotionUpdateEvent extends EventBase {
+public class MotionUpdateEvent extends Event {
+    private final EventType eventType;
     private double x;
     private double y;
     private double z;
+
     private float yaw;
     private float pitch;
+
     private boolean onGround;
 
     public MotionUpdateEvent(EventType eventType, double x, double y, double z, float yaw, float pitch, boolean onGround) {
-        super(eventType);
+        this.eventType = eventType;
         this.x = x;
         this.y = y;
         this.z = z;
         this.yaw = yaw;
         this.pitch = pitch;
         this.onGround = onGround;
+    }
+
+    public EventType getEventType() {
+        return eventType;
     }
 
     public double getX() {

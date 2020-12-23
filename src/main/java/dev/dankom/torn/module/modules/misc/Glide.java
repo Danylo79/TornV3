@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.misc;
 
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 import net.minecraft.block.material.Material;
@@ -13,7 +14,7 @@ public class Glide extends Module {
     }
 
     @Override
-    public void onTick() {
+    public void onUpdate(UpdateEvent e) {
         double oldY = mc.thePlayer.motionY;
         float oldJ = mc.thePlayer.jumpMovementFactor;
         if (isToggled()) {

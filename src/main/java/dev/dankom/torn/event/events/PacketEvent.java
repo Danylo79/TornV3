@@ -1,22 +1,23 @@
 package dev.dankom.torn.event.events;
 
-import dev.dankom.torn.event.EventBase;
+import dev.dankom.torn.event.Cancellable;
 import dev.dankom.torn.event.EventType;
 import net.minecraft.network.Packet;
 
-public class PacketEvent extends EventBase {
-    private Packet packet;
+public class PacketEvent extends Cancellable {
+    private final EventType type;
+    private final Packet packetIn;
 
-    public PacketEvent(EventType type, Packet packet) {
-        super(type);
-        this.packet = packet;
+    public PacketEvent(EventType type, Packet packetIn) {
+        this.type = type;
+        this.packetIn = packetIn;
+    }
+
+    public EventType getType() {
+        return type;
     }
 
     public Packet getPacket() {
-        return packet;
-    }
-
-    public void setPacket(Packet packet) {
-        this.packet = packet;
+        return packetIn;
     }
 }

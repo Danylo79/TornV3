@@ -1,6 +1,7 @@
 package dev.dankom.torn.module.modules.gui;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.events.Render2DEvent;
 import dev.dankom.torn.gui.clickgui.ClickGui;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.module.base.Category;
@@ -17,11 +18,11 @@ public class TextGUI extends Module {
     }
 
     @Override
-    public void onRender(RenderGameOverlayEvent e) {
+    public void onRender2D(Render2DEvent e) {
         if (!isToggled()) {
             return;
         }
-        if (mc.currentScreen == null && e.type.equals(RenderGameOverlayEvent.ElementType.CROSSHAIRS)) {
+        if (mc.currentScreen == null) {
             ScaledResolution sr = new ScaledResolution(mc);
             int y = 2;
             for (Module m : Torn.getModuleManager().getEnabledModules()) {

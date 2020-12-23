@@ -1,6 +1,7 @@
 package dev.dankom.torn.module.modules.gui;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.events.Render2DEvent;
 import dev.dankom.torn.gui.clickgui.ClickGui;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -30,8 +31,8 @@ public class HUD extends Module {
     }
 
     @Override
-    public void onRender(RenderGameOverlayEvent e) {
-        if (!isToggled() || e.type.equals(RenderGameOverlayEvent.ElementType.CROSSHAIRS)) return;
+    public void onRender2D(Render2DEvent e) {
+        if (!isToggled()) return;
 
         FontRenderer fontRenderer = mc.fontRendererObj;
         ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());

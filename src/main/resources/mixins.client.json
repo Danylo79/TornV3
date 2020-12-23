@@ -5,9 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "entity.MixinEntity",
-    "player.MixinEntityPlayerSP"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "player.MixinEntityPlayerSP",
+    "MixinMinecraft",
+    "client.MixinGuiIngame",
+    "client.MixinGuiSpectator"
+  ]
 }

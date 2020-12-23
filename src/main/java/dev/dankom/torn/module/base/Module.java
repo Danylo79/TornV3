@@ -1,24 +1,18 @@
 package dev.dankom.torn.module.base;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.EventManager;
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.MotionUpdateEvent;
 import dev.dankom.torn.event.events.PacketEvent;
 import dev.dankom.torn.event.events.Render2DEvent;
 import dev.dankom.torn.event.events.UpdateEvent;
-import dev.dankom.torn.gui.notification.Notification;
-import dev.dankom.torn.gui.notification.NotificationManager;
-import dev.dankom.torn.gui.notification.NotificationType;
 import dev.dankom.torn.module.ModuleManager;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.settings.SettingsManager;
 import dev.dankom.torn.util.wrapper.Invoker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.awt.*;
 
@@ -56,16 +50,12 @@ public class Module {
 
     //Events
     public void onEnable() {
-        MinecraftForge.EVENT_BUS.register(this);
+        EventManager.register(this);
     }
     public void onDisable() {
-        MinecraftForge.EVENT_BUS.unregister(this);
+        EventManager.unregister(this);
     }
     public void onToggle() {}
-    public void onTick() {}
-    public void onRenderTick() {}
-    public void onRender() {}
-    public void onRender(RenderGameOverlayEvent e) {}
     public void onUpdate(UpdateEvent e) {}
     public void onMove(MotionUpdateEvent e) {}
     public void onPacket(PacketEvent e) {}
@@ -155,19 +145,6 @@ public class Module {
         return description;
     }
 
-    @SubscribeEvent
-    public void render(RenderGameOverlayEvent e) {
-        if (!isInitialized()) { return; }
-        onRender();
-        onRender(e);
-    }
-
-    @SubscribeEvent
-    public void tick(TickEvent.PlayerTickEvent e) {
-        if (!isInitialized()) { return; }
-        onTick();
-    }
-
     public void setHide(boolean hide) {
         showInEnabledMods = hide;
     }
@@ -176,32 +153,27 @@ public class Module {
         return showInEnabledMods;
     }
 
-    @SubscribeEvent
+    @EventTarget
     public void update(UpdateEvent e) {
         onUpdate(e);
     }
 
-    @SubscribeEvent
+    @EventTarget
     public void move(MotionUpdateEvent e) {
         onMove(e);
     }
 
-    @SubscribeEvent
+    @EventTarget
     public void packet(PacketEvent e) {
         onPacket(e);
     }
 
-    @SubscribeEvent
+    @EventTarget
     public void render2D(Render2DEvent e) {
         onRender2D(e);
     }
 
-    @SubscribeEvent
-    public void renderTick(TickEvent.RenderTickEvent e) {
-        onRenderTick();
-    }
-
-    @SubscribeEvent
+    @EventTarget
     public void event(Event event) {
         onEvent(event);
     }

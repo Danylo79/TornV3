@@ -20,9 +20,4 @@ public class Notifications extends Module {
     public void onRender2D(Render2DEvent e) {
         NotificationManager.render();
     }
-
-    @Override
-    public void onRender(RenderGameOverlayEvent e) {
-        NotificationManager.render();
-    }
 }

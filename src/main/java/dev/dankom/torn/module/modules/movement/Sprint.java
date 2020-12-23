@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.movement;
 
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 
@@ -11,7 +12,7 @@ public class Sprint extends Module {
     }
 
     @Override
-    public void onTick() {
+    public void onUpdate(UpdateEvent e) {
         invoker.setSprint(true);
     }
 

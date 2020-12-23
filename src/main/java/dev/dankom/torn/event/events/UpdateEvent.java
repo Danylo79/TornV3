@@ -1,10 +1,5 @@
 package dev.dankom.torn.event.events;
 
-import dev.dankom.torn.event.EventBase;
-import dev.dankom.torn.event.EventType;
+import dev.dankom.torn.event.Event;
 
-public class UpdateEvent extends EventBase {
-    public UpdateEvent(EventType eventType) {
-        super(eventType);
-    }
-}
+public class UpdateEvent extends Event {}

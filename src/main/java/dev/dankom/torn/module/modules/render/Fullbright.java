@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.render;
 
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 import dev.dankom.torn.settings.Setting;
@@ -23,7 +24,7 @@ public class Fullbright extends Module {
     }
 
     @Override
-    public void onTick() {
+    public void onUpdate(UpdateEvent e) {
         mc.gameSettings.gammaSetting = (int) getSetting("Brightness").getValDouble();
     }
 

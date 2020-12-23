@@ -18,7 +18,7 @@ public class ModuleManager {
 
     public ModuleManager() {
         addModule(new ClickGUI());
-        addModule(new AimAssist());
+//        addModule(new AimAssist());
         addModule(new Velocity());
         addModule(new BunnyHop());
         addModule(new TextGUI());

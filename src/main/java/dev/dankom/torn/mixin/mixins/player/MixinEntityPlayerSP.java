@@ -2,6 +2,7 @@ package dev.dankom.torn.mixin.mixins.player;
 
 import dev.dankom.torn.event.EventType;
 import dev.dankom.torn.event.events.MotionUpdateEvent;
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.mixin.mixins.entity.MixinEntity;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,21 +17,15 @@ public class MixinEntityPlayerSP extends MixinEntity {
     private double cachedY;
     private double cachedZ;
 
-    private float cachedRotationPitch;
-    private float cachedRotationYaw;
-
     @Inject(method = "onUpdateWalkingPlayer", at = @At("HEAD"))
     private void onUpdateWalkingPlayerPre(CallbackInfo ci) {
         cachedX = posX;
         cachedY = posY;
         cachedZ = posZ;
 
-        cachedRotationYaw = rotationYaw;
-        cachedRotationPitch = rotationPitch;
-
         MotionUpdateEvent event = new MotionUpdateEvent(EventType.PRE, posX, posY, posZ, rotationYaw, rotationPitch, onGround);
 
-        MinecraftForge.EVENT_BUS.post(event);
+        event.call();
 
         posX = event.getX();
         posY = event.getY();
@@ -38,8 +33,6 @@ public class MixinEntityPlayerSP extends MixinEntity {
 
         rotationYaw = event.getYaw();
         rotationPitch = event.getPitch();
-
-        System.out.println("Player Walking (Called by Mixin)");
     }
 
     @Inject(method = "onUpdateWalkingPlayer", at = @At("RETURN"))
@@ -48,9 +41,15 @@ public class MixinEntityPlayerSP extends MixinEntity {
         posY = cachedY;
         posZ = cachedZ;
 
-        rotationYaw = cachedRotationYaw;
-        rotationPitch = cachedRotationPitch;
+        new MotionUpdateEvent(EventType.POST, posX, posY, posZ, rotationYaw, rotationPitch, onGround).call();
+    }
 
-        MinecraftForge.EVENT_BUS.post(new MotionUpdateEvent(EventType.POST, posX, posY, posZ, rotationYaw, rotationPitch, onGround));
+    @Inject(method = "onUpdate", at = @At("HEAD"))
+    private void onUpdate(CallbackInfo ci) {
+        posX = cachedX;
+        posY = cachedY;
+        posZ = cachedZ;
+
+        new MotionUpdateEvent(EventType.POST, posX, posY, posZ, rotationYaw, rotationPitch, onGround).call();
     }
 }

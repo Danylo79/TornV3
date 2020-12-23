@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.misc;
 
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 import dev.dankom.torn.util.InventoryUtil;
@@ -20,7 +21,7 @@ public class AutoEat extends Module {
     }
 
     @Override
-    public void onTick() {
+    public void onUpdate(UpdateEvent e) {
         if(prevSlot != -1 && finished && goOnce){
             invoker.setInvSlot(prevSlot);
             invoker.setUseItemKeyPressed(false);

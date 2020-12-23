@@ -2,9 +2,9 @@ package dev.dankom.torn;
 
 import dev.dankom.torn.alt.AltManager;
 import dev.dankom.torn.command.CommandManager;
+import dev.dankom.torn.event.EventManager;
 import dev.dankom.torn.file.FileManager;
 import dev.dankom.torn.gui.clickgui.ClickGui;
-import dev.dankom.torn.gui.notification.NotificationManager;
 import dev.dankom.torn.gui.tabgui.SubTab;
 import dev.dankom.torn.gui.tabgui.Tab;
 import dev.dankom.torn.gui.tabgui.TabGui;
@@ -12,20 +12,14 @@ import dev.dankom.torn.module.ModuleManager;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 import dev.dankom.torn.settings.SettingsManager;
-import dev.dankom.torn.listeners.ClickListener;
+import dev.dankom.torn.listeners.KeyListener;
 import dev.dankom.torn.theme.Theme;
-import dev.dankom.torn.util.StringUtil;
 import dev.dankom.torn.util.wrapper.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLModDisabledEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -38,6 +32,7 @@ public class Torn
 {
     public static final String MODID = "torn";
     public static final String VERSION = "1.0";
+    public static Torn INSTANCE;
 
     public static String CLIENT_NAME = "Torn", CLIENT_VERSION = "B3.0", CLIENT_AUTHOR = "Dankom";
 
@@ -49,14 +44,17 @@ public class Torn
     private static FileManager fileManager = new FileManager();
     private static CommandManager commandManager = new CommandManager();
     private static TabGui<Module> tabGui = new TabGui<>();
+    private static EventManager eventManager = new EventManager();
 
-    @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public Torn() {
+        INSTANCE = this;
+    }
+
+    public void start() {
         getFileManager().load();
 
-        MinecraftForge.EVENT_BUS.register(new ClickListener());
-        MinecraftForge.EVENT_BUS.register(this);
+        EventManager.register(this);
+        EventManager.register(new KeyListener());
 
         HashMap<Category, List<Module>> moduleCategoryMap = new HashMap<>();
 
@@ -77,6 +75,10 @@ public class Torn
 
             tabGui.addTab(tab);
         });
+    }
+
+    public void shutdown() {
+
     }
 
     public static ModuleManager getModuleManager() {
@@ -105,6 +107,10 @@ public class Torn
 
     public static TabGui getTabGUI() {
         return tabGui;
+    }
+
+    public static EventManager getEventManager() {
+        return eventManager;
     }
 
     public static void save() {

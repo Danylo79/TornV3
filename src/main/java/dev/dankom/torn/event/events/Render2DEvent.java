@@ -1,10 +1,5 @@
 package dev.dankom.torn.event.events;
 
-import dev.dankom.torn.event.EventBase;
-import dev.dankom.torn.event.EventType;
+import dev.dankom.torn.event.Event;
 
-public class Render2DEvent extends EventBase {
-    public Render2DEvent() {
-        super(EventType.NONE);
-    }
-}
+public class Render2DEvent extends Event {}

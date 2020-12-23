@@ -1,6 +1,7 @@
 package dev.dankom.torn.module.modules.combat;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -25,8 +26,8 @@ public class AimAssist extends Module {
         addSetting(new Setting("Range", this, 10.0, 1.0, 50.0, false));
     }
 
-    @SubscribeEvent
-    public void onUpdate(TickEvent.WorldTickEvent e) {
+    @Override
+    public void onUpdate(UpdateEvent e) {
         if (Torn.getWrapper().getWorld() == null || Torn.getWrapper().getWorld().loadedEntityList == null) { return; }
         target = entityUtils.getClosestEntity(Torn.getWrapper().getPlayer(), getSetting("Players").getValBoolean(), getSetting("Monsters").getValBoolean(), getSetting("Animals").getValBoolean(), getSetting("Invisibles").getValBoolean(), false);
         try {

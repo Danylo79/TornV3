@@ -40,7 +40,7 @@ public class AutoClicker extends Module {
     }
 
     @Override
-    public void onRenderTick() {
+    public void onUpdate(UpdateEvent e) {
         tick();
     }
 

@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.misc;
 
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 
@@ -14,7 +15,7 @@ public class Twerk extends Module {
     }
 
     @Override
-    public void onTick() {
+    public void onUpdate(UpdateEvent e) {
         if(!skipTick){
             skipTick = true;
             invoker.setShift(true);

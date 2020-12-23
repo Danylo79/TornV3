@@ -1,6 +1,7 @@
 package dev.dankom.torn.module.modules.combat;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -18,8 +19,8 @@ public class Velocity extends Module {
         addSetting(new Setting("Vertical", this, 90, 1, 100, true));
     }
 
-    @SubscribeEvent
-    public void onLivingUpdate(LivingEvent.LivingUpdateEvent e) {
+    @Override
+    public void onUpdate(UpdateEvent e) {
         if (Torn.getWrapper().getPlayer() == null) { return; }
         float horizontal = (float) getSetting("Horizontal").getValDouble();
         float vertical = (float) getSetting("Vertical").getValDouble();

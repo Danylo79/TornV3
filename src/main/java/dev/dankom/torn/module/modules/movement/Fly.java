@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.movement;
 
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 import dev.dankom.torn.settings.Setting;
@@ -21,7 +22,7 @@ public class Fly extends Module {
     }
 
     @Override
-    public void onTick() {
+    public void onUpdate(UpdateEvent e) {
         setEnabledModName(ColorUtil.translate("Fly " + StringUtil.wrapWithSquareBracket(getSetting("Fly Mode").getValString())));
         String mode = getSetting("Fly Mode").getValString();
 
