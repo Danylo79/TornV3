@@ -5,9 +5,11 @@ import dev.dankom.torn.module.base.Module;
 import dev.dankom.torn.module.modules.combat.*;
 import dev.dankom.torn.module.modules.gui.*;
 import dev.dankom.torn.module.modules.misc.AutoEat;
+import dev.dankom.torn.module.modules.misc.AutoFish;
 import dev.dankom.torn.module.modules.misc.Glide;
 import dev.dankom.torn.module.modules.misc.Twerk;
 import dev.dankom.torn.module.modules.movement.*;
+import dev.dankom.torn.module.modules.render.ESP;
 import dev.dankom.torn.module.modules.render.Fullbright;
 
 import java.util.ArrayList;
@@ -37,6 +39,9 @@ public class ModuleManager {
         addModule(new Glide());
         addModule(new AutoSoup());
         addModule(new KillAura());
+        addModule(new AntiKnockback());
+        addModule(new AutoFish());
+        addModule(new ESP());
     }
 
     public void addModule(Module module) {

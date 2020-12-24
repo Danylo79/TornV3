@@ -55,7 +55,7 @@ public class HUD extends Module {
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date());
             String am_pm = (cal.get(Calendar.AM_PM) == Calendar.AM ? "AM" : "PM");
-            String currTime = cal.getTime().getHours() + ":" + cal.getTime().getMinutes() + " " + am_pm;
+            String currTime = cal.getTime().getHours() + ":" + (cal.getTime().getMinutes() < 10 ? "0" : "") + cal.getTime().getMinutes() + " " + am_pm;
             fontRenderer.drawString(currTime, res.getScaledWidth() - fontRenderer.getStringWidth(currTime) - 4, res.getScaledHeight() - fontRenderer.FONT_HEIGHT - 2, ClickGui.getColor(), true);
         }
     }

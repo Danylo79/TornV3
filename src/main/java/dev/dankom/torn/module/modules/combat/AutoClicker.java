@@ -51,7 +51,7 @@ public class AutoClicker extends Module {
         if (mouse_button.equalsIgnoreCase("Left")) {
             key = mc.gameSettings.keyBindAttack.getKeyCode();
         } else {
-            key = mc.gameSettings.keyBindPickBlock.getKeyCode();
+            key = mc.gameSettings.keyBindUseItem.getKeyCode();
         }
         if ((Mouse.isButtonDown(0) && mouse_button.equalsIgnoreCase("Left")) || (Mouse.isButtonDown(1) && mouse_button.equalsIgnoreCase("Right"))) {
             if (System.currentTimeMillis() - lastClick > (speed * 1000)) {
