@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.movement;
 
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.EventType;
 import dev.dankom.torn.event.events.MotionUpdateEvent;
 import dev.dankom.torn.event.events.PacketEvent;
@@ -22,7 +23,7 @@ public class SetbackDetector extends Module {
         super("Setback Detector", "Tells you when you lag back", Category.MOVEMENT, -1, new Color(74, 208, 204), true, true);
     }
 
-    @Override
+    @EventTarget
     public void onMove(MotionUpdateEvent e) {
         if (e.getEventType() != EventType.POST) return;
 
@@ -46,7 +47,7 @@ public class SetbackDetector extends Module {
         }
     }
 
-    @Override
+    @EventTarget
     public void onPacket(PacketEvent e) {
         if (e.getPacket() instanceof S08PacketPlayerPosLook) {
             S08PacketPlayerPosLook p = (S08PacketPlayerPosLook) e.getPacket();

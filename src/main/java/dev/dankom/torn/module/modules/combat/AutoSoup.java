@@ -1,6 +1,7 @@
 package dev.dankom.torn.module.modules.combat;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -28,8 +29,8 @@ public class AutoSoup extends Module {
         addSetting(new Setting("Min Health", this, 19.0, 1.0, 20.0, false));
     }
 
-    @Override
-    public void onUpdate(UpdateEvent e) {
+    @EventTarget
+    public void onUpdate(UpdateEvent event) {
 
         setEnabledModName(ColorUtil.translate("AutoSoup " + StringUtil.wrapWithSquareBracket("Min HP: " + getSetting("Min Health").getValDouble())));
         if(Torn.getWrapper() != null && Torn.getWrapper().getPlayer().getHealth() <= getSetting("Min Health").getValDouble()) {

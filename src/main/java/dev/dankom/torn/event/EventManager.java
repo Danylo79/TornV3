@@ -12,8 +12,6 @@ public class EventManager {
 
     public static void register(final Object o) {
 
-        System.out.println("[1] Registered events for: " + o);
-
         for (final Method method : o.getClass().getDeclaredMethods()) {
             if (!isMethodBad(method)) {
                 register(method, o);
@@ -23,7 +21,6 @@ public class EventManager {
 
     public static void register(final Object o, final Class<? extends Event> clazz) {
 
-        System.out.println("[2] Registered events for: " + o);
         for (final Method method : o.getClass().getDeclaredMethods()) {
             if (!isMethodBad(method, clazz)) {
                 register(method, o);
@@ -33,7 +30,6 @@ public class EventManager {
 
     private static void register(final Method method, final Object o) {
 
-        System.out.println("[3] Registered events for: " + o);
         final Class<?> clazz = method.getParameterTypes()[0];
         final Data methodData = new Data(o, method, method.getAnnotation(EventTarget.class).value());
 
@@ -122,8 +118,8 @@ public class EventManager {
     }
 
     private static boolean isMethodBad(final Method method) {
-
-        return method.getParameterTypes().length != 1 || !method.isAnnotationPresent(EventTarget.class);
+        boolean b = method.getParameterTypes().length != 1 || !method.isAnnotationPresent(EventTarget.class);
+        return b;
     }
 
     private static boolean isMethodBad(final Method method, final Class<? extends Event> clazz) {

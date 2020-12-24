@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.movement;
 
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -21,8 +22,8 @@ public class Fly extends Module {
         addSetting(new Setting("Fly Mode", this, "Hypixel", options));
     }
 
-    @Override
-    public void onUpdate(UpdateEvent e) {
+    @EventTarget
+    public void onUpdate(UpdateEvent event) {
         setEnabledModName(ColorUtil.translate("Fly " + StringUtil.wrapWithSquareBracket(getSetting("Fly Mode").getValString())));
         String mode = getSetting("Fly Mode").getValString();
 
@@ -58,6 +59,4 @@ public class Fly extends Module {
         if(mode.equalsIgnoreCase("Vanilla"))
             mc.thePlayer.capabilities.isFlying = false;
     }
-
-
 }

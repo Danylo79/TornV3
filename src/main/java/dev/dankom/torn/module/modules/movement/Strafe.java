@@ -1,6 +1,7 @@
 package dev.dankom.torn.module.modules.movement;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -20,8 +21,8 @@ public class Strafe extends Module {
         addSetting(new Setting("Max Movement", this, 0.1, 0.1, 1, false));
     }
 
-    @Override
-    public void onUpdate(UpdateEvent e) {
+    @EventTarget
+    public void onUpdate(UpdateEvent event) {
         double min = getSetting("Min Movement").getValDouble();
         double max = getSetting("Max Movement").getValDouble();
 

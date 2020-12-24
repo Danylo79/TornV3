@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.misc;
 
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -13,8 +14,8 @@ public class Glide extends Module {
         super("Glide", "Makes you glide", Category.MISC, -1, new Color(0, 255, 173), true, true);
     }
 
-    @Override
-    public void onUpdate(UpdateEvent e) {
+    @EventTarget
+    public void onUpdate(UpdateEvent event) {
         double oldY = mc.thePlayer.motionY;
         float oldJ = mc.thePlayer.jumpMovementFactor;
         if (isToggled()) {

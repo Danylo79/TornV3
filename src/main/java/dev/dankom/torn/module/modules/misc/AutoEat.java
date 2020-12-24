@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.misc;
 
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -20,8 +21,8 @@ public class AutoEat extends Module {
         super("AutoEat", "Automatically eats food when you are hungry", Category.MISC, -1, new Color(255, 100, 0), true, true);
     }
 
-    @Override
-    public void onUpdate(UpdateEvent e) {
+    @EventTarget
+    public void onUpdate(UpdateEvent event) {
         if(prevSlot != -1 && finished && goOnce){
             invoker.setInvSlot(prevSlot);
             invoker.setUseItemKeyPressed(false);

@@ -1,7 +1,9 @@
 package dev.dankom.torn.module.modules.gui;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.Render2DEvent;
+import dev.dankom.torn.event.events.RenderEvent;
 import dev.dankom.torn.gui.clickgui.ClickGui;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.module.base.Category;
@@ -17,11 +19,8 @@ public class TextGUI extends Module {
         addSetting(new Setting("Use Module Color", this, false));
     }
 
-    @Override
-    public void onRender2D(Render2DEvent e) {
-        if (!isToggled()) {
-            return;
-        }
+    @EventTarget
+    public void onRender(RenderEvent event) {
         if (mc.currentScreen == null) {
             ScaledResolution sr = new ScaledResolution(mc);
             int y = 2;

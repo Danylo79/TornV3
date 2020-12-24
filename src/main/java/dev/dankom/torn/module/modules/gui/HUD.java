@@ -1,12 +1,16 @@
 package dev.dankom.torn.module.modules.gui;
 
 import dev.dankom.torn.Torn;
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.Render2DEvent;
+import dev.dankom.torn.event.events.RenderEvent;
+import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.gui.clickgui.ClickGui;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.theme.Theme;
+import dev.dankom.torn.util.wrapper.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -30,12 +34,12 @@ public class HUD extends Module {
         addSetting(new Setting("Time", this, false));
     }
 
-    @Override
-    public void onRender2D(Render2DEvent e) {
-        if (!isToggled()) return;
-
+    @EventTarget
+    public void onRender(RenderEvent event) {
         FontRenderer fontRenderer = mc.fontRendererObj;
         ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
+        Wrapper wrapper = Torn.getWrapper();
+        if (wrapper.getPlayer() == null || mc.currentScreen != null) return;
 
         boolean fps = getSetting("FPS").getValBoolean();
         boolean bps = getSetting("BPS").getValBoolean();
@@ -44,7 +48,7 @@ public class HUD extends Module {
             fontRenderer.drawString("FPS: " + Minecraft.getDebugFPS(), 4, res.getScaledHeight() - fontRenderer.FONT_HEIGHT - 2, ClickGui.getColor(), true);
         }
         if (bps) {
-            double currSpeed = Math.sqrt(mc.thePlayer.motionX * mc.thePlayer.motionX + mc.thePlayer.motionZ * mc.thePlayer.motionZ);
+            double currSpeed = Math.sqrt(wrapper.getPlayer().motionX * wrapper.getPlayer().motionX + wrapper.getPlayer().motionZ * wrapper.getPlayer().motionZ);
             fontRenderer.drawString(String.format("BPS: %.2f", currSpeed), (fps ? (Minecraft.getDebugFPS() > 100 ? 50 : 45) : 4), res.getScaledHeight() - fontRenderer.FONT_HEIGHT - 2, ClickGui.getColor(), true);
         }
         if (time) {

@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.combat;
 
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.module.base.Category;
@@ -39,8 +40,8 @@ public class AutoClicker extends Module {
         updateVals();
     }
 
-    @Override
-    public void onUpdate(UpdateEvent e) {
+    @EventTarget
+    public void onUpdate(UpdateEvent event) {
         tick();
     }
 

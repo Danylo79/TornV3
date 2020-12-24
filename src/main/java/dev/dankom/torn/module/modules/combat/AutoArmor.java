@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.combat;
 
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.UpdateEvent;
 import dev.dankom.torn.module.base.Category;
 import dev.dankom.torn.module.base.Module;
@@ -23,8 +24,8 @@ public class AutoArmor extends Module {
         best = true;
     }
 
-    @Override
-    public void onUpdate(UpdateEvent e) {
+    @EventTarget
+    public void onUpdate(UpdateEvent event) {
         autoArmor();
         betterArmor();
     }

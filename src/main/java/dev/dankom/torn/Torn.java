@@ -3,6 +3,8 @@ package dev.dankom.torn;
 import dev.dankom.torn.alt.AltManager;
 import dev.dankom.torn.command.CommandManager;
 import dev.dankom.torn.event.EventManager;
+import dev.dankom.torn.event.EventTarget;
+import dev.dankom.torn.event.events.RenderEvent;
 import dev.dankom.torn.file.FileManager;
 import dev.dankom.torn.gui.clickgui.ClickGui;
 import dev.dankom.torn.gui.tabgui.SubTab;
@@ -117,10 +119,9 @@ public class Torn
         getFileManager().save();
     }
 
-    @SubscribeEvent
-    public void onRender(RenderGameOverlayEvent e) {
-        if (!e.type.equals(RenderGameOverlayEvent.ElementType.CROSSHAIRS)) return;
-
+    @EventTarget
+    public void onRender(RenderEvent e) {
+        if (Minecraft.getMinecraft().currentScreen == null) { return; }
         String type = getSettingsManager().getSetting(getModuleManager().getModule("ClickGUI"), "Watermark Type").getValString();
         if (type.equalsIgnoreCase("Large")) {
             GL11.glScaled(2.0, 2.0, 2.0);

@@ -1,6 +1,8 @@
 package dev.dankom.torn.module.modules.gui;
 
+import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.events.Render2DEvent;
+import dev.dankom.torn.event.events.RenderEvent;
 import dev.dankom.torn.gui.notification.NotificationManager;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.module.base.Category;
@@ -16,8 +18,8 @@ public class Notifications extends Module {
         addSetting(new Setting("Show Override", this, false));
     }
 
-    @Override
-    public void onRender2D(Render2DEvent e) {
+    @EventTarget
+    public void onRender(RenderEvent event) {
         NotificationManager.render();
     }
 }

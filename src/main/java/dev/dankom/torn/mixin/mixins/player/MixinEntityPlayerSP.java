@@ -50,6 +50,6 @@ public class MixinEntityPlayerSP extends MixinEntity {
         posY = cachedY;
         posZ = cachedZ;
 
-        new MotionUpdateEvent(EventType.POST, posX, posY, posZ, rotationYaw, rotationPitch, onGround).call();
+        new UpdateEvent().call();
     }
 }

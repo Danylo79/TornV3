@@ -8,6 +8,7 @@
     "player.MixinEntityPlayerSP",
     "MixinMinecraft",
     "client.MixinGuiIngame",
-    "client.MixinGuiSpectator"
+    "client.MixinGuiSpectator",
+    "entity.MixinEntityRenderer"
   ]
 }

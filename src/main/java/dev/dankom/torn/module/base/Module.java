@@ -3,10 +3,7 @@ package dev.dankom.torn.module.base;
 import dev.dankom.torn.Torn;
 import dev.dankom.torn.event.EventManager;
 import dev.dankom.torn.event.EventTarget;
-import dev.dankom.torn.event.events.MotionUpdateEvent;
-import dev.dankom.torn.event.events.PacketEvent;
-import dev.dankom.torn.event.events.Render2DEvent;
-import dev.dankom.torn.event.events.UpdateEvent;
+import dev.dankom.torn.event.events.*;
 import dev.dankom.torn.module.ModuleManager;
 import dev.dankom.torn.settings.Setting;
 import dev.dankom.torn.settings.SettingsManager;
@@ -60,6 +57,7 @@ public class Module {
     public void onMove(MotionUpdateEvent e) {}
     public void onPacket(PacketEvent e) {}
     public void onRender2D(Render2DEvent e) {}
+    public void onRender(RenderEvent e) {}
     public void onEvent(Event event) {}
     //
 
@@ -171,6 +169,11 @@ public class Module {
     @EventTarget
     public void render2D(Render2DEvent e) {
         onRender2D(e);
+    }
+
+    @EventTarget
+    public void render(RenderEvent e) {
+        onRender(e);
     }
 
     @EventTarget
