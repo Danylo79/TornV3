@@ -12,6 +12,8 @@
     "entity.MixinEntityRenderer",
     "gui.chat.MixinGuiChat",
     "gui.chat.MixinGuiChat",
-    "MixinRenderManager"
+    "MixinRenderManager",
+    "player.MixinEntityLivingBase",
+    "player.MixinEntityPlayer"
   ]
 }

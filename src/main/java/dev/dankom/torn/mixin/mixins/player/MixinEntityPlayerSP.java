@@ -1,5 +1,6 @@
 package dev.dankom.torn.mixin.mixins.player;
 
+import dev.dankom.torn.Torn;
 import dev.dankom.torn.event.EventType;
 import dev.dankom.torn.event.events.MotionUpdateEvent;
 import dev.dankom.torn.event.events.UpdateEvent;
@@ -25,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EntityPlayerSP.class)
 @SideOnly(Side.CLIENT)
-public abstract class MixinEntityPlayerSP extends MixinEntity {
+public abstract class MixinEntityPlayerSP extends MixinEntityPlayer {
 
     private double cachedX;
     private double cachedY;
