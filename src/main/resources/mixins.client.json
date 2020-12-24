@@ -9,11 +9,13 @@
     "MixinMinecraft",
     "gui.MixinGuiIngame",
     "gui.MixinGuiSpectator",
-    "entity.MixinEntityRenderer",
+    "render.MixinEntityRenderer",
     "gui.chat.MixinGuiChat",
     "gui.chat.MixinGuiChat",
-    "MixinRenderManager",
+    "render.MixinRenderManager",
     "player.MixinEntityLivingBase",
-    "player.MixinEntityPlayer"
+    "player.MixinEntityPlayer",
+    "block.MixinBlockLiquid",
+    "block.MixinBlock"
   ]
 }

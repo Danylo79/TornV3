@@ -1,4 +1,4 @@
-package dev.dankom.torn.mixin.mixins;
+package dev.dankom.torn.mixin.mixins.render;
 
 import dev.dankom.torn.event.events.EntityRenderEvent;
 import net.minecraft.client.renderer.entity.Render;
