@@ -53,12 +53,6 @@ public class Module {
         EventManager.unregister(this);
     }
     public void onToggle() {}
-    public void onUpdate(UpdateEvent e) {}
-    public void onMove(MotionUpdateEvent e) {}
-    public void onPacket(PacketEvent e) {}
-    public void onRender2D(Render2DEvent e) {}
-    public void onRender(RenderEvent e) {}
-    public void onEvent(Event event) {}
     //
 
     //Getters and Setters
@@ -149,35 +143,5 @@ public class Module {
 
     public boolean isHidden() {
         return showInEnabledMods;
-    }
-
-    @EventTarget
-    public void update(UpdateEvent e) {
-        onUpdate(e);
-    }
-
-    @EventTarget
-    public void move(MotionUpdateEvent e) {
-        onMove(e);
-    }
-
-    @EventTarget
-    public void packet(PacketEvent e) {
-        onPacket(e);
-    }
-
-    @EventTarget
-    public void render2D(Render2DEvent e) {
-        onRender2D(e);
-    }
-
-    @EventTarget
-    public void render(RenderEvent e) {
-        onRender(e);
-    }
-
-    @EventTarget
-    public void event(Event event) {
-        onEvent(event);
     }
 }

@@ -44,14 +44,6 @@ public class Fly extends Module {
     }
 
     @Override
-    public void onEnable() {
-        String mode = getSetting("Fly Mode").getValString();
-        super.onEnable();
-
-        System.out.println(mode);
-    }
-
-    @Override
     public void onDisable() {
         String mode = getSetting("Fly Mode").getValString();
         super.onDisable();

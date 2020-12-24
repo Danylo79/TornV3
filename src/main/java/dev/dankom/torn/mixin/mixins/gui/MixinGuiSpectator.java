@@ -1,4 +1,4 @@
-package dev.dankom.torn.mixin.mixins.client;
+package dev.dankom.torn.mixin.mixins.gui;
 
 import dev.dankom.torn.event.events.Render2DEvent;
 import net.minecraft.client.gui.GuiSpectator;

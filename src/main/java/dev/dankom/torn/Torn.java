@@ -57,6 +57,7 @@ public class Torn
 
         EventManager.register(this);
         EventManager.register(new KeyListener());
+        commandManager.addCommands();
 
         HashMap<Category, List<Module>> moduleCategoryMap = new HashMap<>();
 
@@ -115,13 +116,17 @@ public class Torn
         return eventManager;
     }
 
+    public static CommandManager getCommandManager() {
+        return commandManager;
+    }
+
     public static void save() {
         getFileManager().save();
     }
 
     @EventTarget
     public void onRender(RenderEvent e) {
-        if (Minecraft.getMinecraft().currentScreen == null) { return; }
+        if (Minecraft.getMinecraft().currentScreen != null) { return; }
         String type = getSettingsManager().getSetting(getModuleManager().getModule("ClickGUI"), "Watermark Type").getValString();
         if (type.equalsIgnoreCase("Large")) {
             GL11.glScaled(2.0, 2.0, 2.0);
@@ -132,6 +137,7 @@ public class Torn
             fontRenderer().drawString("by " + Torn.CLIENT_AUTHOR, 8, fontRenderer().FONT_HEIGHT * 2 + 2, Theme.getColorInt(), true);
         } else if (type.equalsIgnoreCase("Small")) {
             fontRenderer().drawString(Torn.CLIENT_NAME + " " + Torn.CLIENT_VERSION, 2, 2, Theme.getColorInt());
+            fontRenderer().drawString("by " + Torn.CLIENT_AUTHOR, 2, fontRenderer().FONT_HEIGHT + 2 * 2, Theme.getColorInt());
         }
     }
 

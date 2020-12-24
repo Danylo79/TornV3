@@ -18,7 +18,7 @@ public class ModuleManager {
 
     public ModuleManager() {
         addModule(new ClickGUI());
-//        addModule(new AimAssist());
+        addModule(new AimAssist());
         addModule(new Velocity());
         addModule(new BunnyHop());
         addModule(new TextGUI());
@@ -36,6 +36,7 @@ public class ModuleManager {
         addModule(new Twerk());
         addModule(new Glide());
         addModule(new AutoSoup());
+        addModule(new KillAura());
     }
 
     public void addModule(Module module) {

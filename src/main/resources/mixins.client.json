@@ -7,8 +7,10 @@
     "entity.MixinEntity",
     "player.MixinEntityPlayerSP",
     "MixinMinecraft",
-    "client.MixinGuiIngame",
-    "client.MixinGuiSpectator",
-    "entity.MixinEntityRenderer"
+    "gui.MixinGuiIngame",
+    "gui.MixinGuiSpectator",
+    "entity.MixinEntityRenderer",
+    "gui.chat.MixinGuiChat",
+    "gui.chat.MixinGuiChat"
   ]
 }
