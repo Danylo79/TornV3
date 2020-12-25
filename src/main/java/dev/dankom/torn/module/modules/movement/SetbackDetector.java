@@ -56,7 +56,7 @@ public class SetbackDetector extends Module {
             if (setback) {
                 lastSetBacks.add(System.currentTimeMillis());
                 if (lastSetBacks.size() < 3)
-                    NotificationManager.show(new Notification(NotificationType.WARNING, getName(), "Flag detected", 1));
+                    NotificationManager.show(new Notification(NotificationType.WARNING, getName(), "Flag detected", 5));
             }
         }
     }

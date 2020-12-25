@@ -1,5 +1,6 @@
 package dev.dankom.torn.module.modules.combat;
 
+import dev.dankom.torn.Torn;
 import dev.dankom.torn.event.EventTarget;
 import dev.dankom.torn.event.EventType;
 import dev.dankom.torn.event.events.MotionUpdateEvent;
@@ -18,6 +19,8 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.MathHelper;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KillAura extends Module {
 
@@ -43,30 +46,32 @@ public class KillAura extends Module {
 
     @EventTarget
     public void onPre(MotionUpdateEvent event) {
-        if (!event.getEventType().equals(EventType.PRE)) return;
-        setEnabledModName(ColorUtil.translate("KillAura " + StringUtil.wrapWithSquareBracket("FOV:" + getSetting("Killaura FOV").getValDouble())));
-        target = getClosest(mc.playerController.getBlockReachDistance());
-        if(target == null)
-            return;
-        updateTime();
-        yaw = mc.thePlayer.rotationYaw;
-        pitch = mc.thePlayer.rotationPitch;
-        boolean block = target != null && getSetting("AutoBlock").getValBoolean() && mc.thePlayer.getHeldItem() != null && mc.thePlayer.getHeldItem().getItem() != null && mc.thePlayer.getHeldItem().getItem() instanceof ItemSword;
-        if(block && target.getDistanceToEntity(mc.thePlayer) < 8F)
-            mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventory.getCurrentItem());
-        if(current - last > 1000 / delay) {
-            attack(target);
-            resetTime();
+        if (event.getEventType().equals(EventType.PRE)) {
+            setEnabledModName(ColorUtil.translate("KillAura " + StringUtil.wrapWithSquareBracket("FOV:" + getSetting("Killaura FOV").getValDouble())));
+            target = getClosest(mc.playerController.getBlockReachDistance());
+            if (target == null)
+                return;
+            updateTime();
+            yaw = mc.thePlayer.rotationYaw;
+            pitch = mc.thePlayer.rotationPitch;
+            boolean block = target != null && getSetting("AutoBlock").getValBoolean() && mc.thePlayer.getHeldItem() != null && mc.thePlayer.getHeldItem().getItem() != null && mc.thePlayer.getHeldItem().getItem() instanceof ItemSword;
+            if (block && target.getDistanceToEntity(mc.thePlayer) < 8F)
+                mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventory.getCurrentItem());
+            if (current - last > 1000 / delay) {
+                attack(target);
+                resetTime();
+            }
         }
     }
 
     @EventTarget
     public void onPost(MotionUpdateEvent event) {
-        if (!event.getEventType().equals(EventType.POST)) return;
-        if(target == null)
-            return;
-        mc.thePlayer.rotationYaw = yaw;
-        mc.thePlayer.rotationPitch = pitch;
+        if (event.getEventType().equals(EventType.POST)) {
+            if (target == null)
+                return;
+            mc.thePlayer.rotationYaw = yaw;
+            mc.thePlayer.rotationPitch = pitch;
+        }
     }
 
     private void attack(Entity entity) {
@@ -88,7 +93,7 @@ public class KillAura extends Module {
     private EntityLivingBase getClosest(double range) {
         double dist = range;
         EntityLivingBase target = null;
-        for (Object object : mc.theWorld.loadedEntityList) {
+        for (Object object : getEntities()) {
             Entity entity = (Entity) object;
             if (entity instanceof EntityLivingBase) {
                 EntityLivingBase player = (EntityLivingBase) entity;
@@ -151,5 +156,16 @@ public class KillAura extends Module {
     @Override
     public void onDisable() {
         super.onDisable();
+    }
+
+    public List<Entity> getEntities() {
+        List<Entity> out = new ArrayList<>();
+        for (Entity e : Torn.getWrapper().getWorld().loadedEntityList) {
+            out.add(e);
+        }
+        for (Entity e : Torn.getWrapper().getWorld().playerEntities) {
+            out.add(e);
+        }
+        return out;
     }
 }

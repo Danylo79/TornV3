@@ -1,9 +1,15 @@
 package dev.dankom.torn.mixin.mixins.entity;
 
+import dev.dankom.torn.Torn;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.Random;
@@ -57,4 +63,18 @@ public abstract class MixinEntity {
     public int ticksExisted;
     @Shadow
     public Entity ridingEntity;
+    @Shadow
+    public abstract Vec3 getPositionEyes(float partialTicks);
+    @Shadow
+    public abstract Vec3 getLook(float partialTicks);
+    @Shadow
+    public abstract void setRotation(float yaw, float pitch);
+    @Shadow
+    public abstract void setPosition(double x, double y, double z);
+    @Shadow
+    public abstract boolean isInWater();
+    @Shadow
+    public abstract boolean isInLava();
+
+    @Shadow public abstract int getEntityId();
 }

@@ -6,8 +6,11 @@ import dev.dankom.torn.module.modules.combat.*;
 import dev.dankom.torn.module.modules.gui.*;
 import dev.dankom.torn.module.modules.misc.*;
 import dev.dankom.torn.module.modules.movement.*;
+import dev.dankom.torn.module.modules.player.AntiAFK;
 import dev.dankom.torn.module.modules.render.ESP;
 import dev.dankom.torn.module.modules.render.Fullbright;
+import dev.dankom.torn.module.modules.render.XRay;
+import dev.dankom.torn.module.modules.world.AutoBreak;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +44,12 @@ public class ModuleManager {
         addModule(new ESP());
         addModule(new Jesus());
         addModule(new Liquids());
+        addModule(new Reach());
+//        addModule(new XRay());
+        addModule(new LongJump());
+        addModule(new NoSlow());
+        addModule(new AntiAFK());
+        addModule(new AutoBreak());
     }
 
     public void addModule(Module module) {

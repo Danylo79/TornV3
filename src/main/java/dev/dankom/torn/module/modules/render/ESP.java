@@ -15,6 +15,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,14 +32,22 @@ public class ESP extends Module {
         addSetting(new Setting("Type", this, "Solid", options));
         addSetting(new Setting("Items", this, false));
         addSetting(new Setting("Mobs", this, false));
+        addSetting(new Setting("Players", this, false));
+        addSetting(new Setting("Invisibles", this, false));
     }
 
     @EventTarget
     public void onEntityRender(EntityRenderEvent e) {
+        if (e.getEntity().isInvisible() && !getSetting("Invisibles").getValBoolean()) {
+            return;
+        }
         if (getSetting("Items").getValBoolean() && e.getEntity() instanceof EntityItem) {
             renderUtils.renderESP(e.getEntity(), e.getX(), e.getY(), e.getZ(), getEspMode());
         }
         if (getSetting("Mobs").getValBoolean() && (e.getEntity() instanceof EntityMob || e.getEntity() instanceof EntitySquid || e.getEntity() instanceof EntitySlime || e.getEntity() instanceof EntityBat || e.getEntity() instanceof EntityIronGolem || e.getEntity() instanceof EntityAnimal)) {
+            renderUtils.renderESP(e.getEntity(), e.getX(), e.getY(), e.getZ(), getEspMode());
+        }
+        if (getSetting("Players").getValBoolean() && e.getEntity() instanceof EntityPlayer) {
             renderUtils.renderESP(e.getEntity(), e.getX(), e.getY(), e.getZ(), getEspMode());
         }
     }

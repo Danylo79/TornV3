@@ -2,8 +2,8 @@ package dev.dankom.torn.mixin.mixins.block;
 
 import dev.dankom.torn.Torn;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
@@ -33,5 +33,10 @@ public class MixinBlockLiquid extends MixinBlock {
             return AxisAlignedBB.fromBounds(pos.getX()+this.minX, pos.getY()+this.minY, pos.getZ()+minZ, pos.getX()+this.maxX, pos.getY()+this.maxY, pos.getZ()+maxZ);
         }
         return null;
+    }
+
+    @Override
+    public BlockState getBlockState() {
+        return blockState;
     }
 }

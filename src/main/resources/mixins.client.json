@@ -16,6 +16,8 @@
     "player.MixinEntityLivingBase",
     "player.MixinEntityPlayer",
     "block.MixinBlockLiquid",
-    "block.MixinBlock"
+    "block.MixinBlock",
+    "player.MixinPlayerControllerMP",
+    "block.MixinBlockSoulSand"
   ]
 }

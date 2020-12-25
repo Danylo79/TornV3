@@ -50,12 +50,10 @@ public class MixinMinecraft implements IMixinMinecraft {
             new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()).call();
     }
 
-    @Override
     public Session getSession() {
         return session;
     }
 
-    @Override
     public void setSession(Session session) {
         this.session = session;
     }
