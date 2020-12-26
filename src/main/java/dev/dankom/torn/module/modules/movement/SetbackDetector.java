@@ -16,8 +16,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class SetbackDetector extends Module {
-    private ArrayList<Vec3> lastLocations = new ArrayList<Vec3>();
-    private ArrayList<Long> lastSetBacks = new ArrayList<Long>();
+    private ArrayList<Vec3> lastLocations = new ArrayList<>();
+    private ArrayList<Long> lastSetBacks = new ArrayList<>();
 
     public SetbackDetector() {
         super("Setback Detector", "Tells you when you lag back", Category.MOVEMENT, -1, new Color(74, 208, 204), true, true);
@@ -25,25 +25,24 @@ public class SetbackDetector extends Module {
 
     @EventTarget
     public void onMove(MotionUpdateEvent e) {
-        if (e.getEventType() != EventType.POST) return;
+        if (e.getEventType() == EventType.POST) {
 
-        ArrayList<Long> remove = new ArrayList<Long>();
+            ArrayList<Long> remove = new ArrayList<Long>();
 
-        for (Long lastSetBack : lastSetBacks) {
-            if (System.currentTimeMillis() - lastSetBack > 5000) {
-                remove.add(lastSetBack);
+            for (Long lastSetBack : lastSetBacks) {
+                if (System.currentTimeMillis() - lastSetBack > 5000) {
+                    remove.add(lastSetBack);
+                }
             }
-        }
-        for (Long aLong : remove) {
-            lastSetBacks.remove(aLong);
-        }
+            for (Long aLong : remove) {
+                lastSetBacks.remove(aLong);
+            }
 
-//        System.out.println(lastSetBacks);
+            lastLocations.add(new Vec3(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ));
 
-        lastLocations.add(new Vec3(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ));
-
-        while (lastLocations.size() > 30) {
-            lastLocations.remove(0);
+            while (lastLocations.size() > 30) {
+                lastLocations.remove(0);
+            }
         }
     }
 
